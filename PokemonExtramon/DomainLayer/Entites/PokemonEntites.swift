@@ -11,7 +11,8 @@ import SwiftUI
 
 // Entites Used by use case
 
-struct PokemonEntities: Identifiable{
+struct PokemonEntities: Identifiable, Equatable{
+
     let id: Int
     let generation: Int?
     let category: String?
@@ -41,7 +42,7 @@ struct PokemonEntities: Identifiable{
             return Color.blue
         case "Glace":
             return Color.blue.opacity(0.5)
-        case "Électrique":
+        case "\u{00c9}lectrik":
             return Color.yellow
         case "Psy":
             return Color.purple
@@ -133,4 +134,11 @@ struct PokemonStats {
     let spdefense: Int?
     let speed: Int?
     
+}
+
+extension PokemonEntities  {
+  
+    static func == (lhs: PokemonEntities, rhs: PokemonEntities) -> Bool {
+        return lhs.id == rhs.id
+    }
 }

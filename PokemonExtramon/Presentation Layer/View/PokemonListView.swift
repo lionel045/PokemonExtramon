@@ -4,8 +4,15 @@ struct PokemonListView: View {
     @EnvironmentObject var viewModel: PokemonViewModel
     var body: some View {
         NavigationStack {
-            List(viewModel.searchPokemon) { pokemon in
-                PokemonRowSubview(pokemon: pokemon)
+            List {
+                ForEach(viewModel.pokemonTenResult.indices, id: \.self) { index in
+                    PokemonRowSubview(pokemon: viewModel.pokemonTenResult[index])
+                        .onAppear {
+                            if index == viewModel.pokemonTenResult.count - 1 {
+                                viewModel.retrieveTenFirstResult()
+                            }
+                        }
+                }
             }
             .listRowSeparatorTint(.yellow.opacity(0.5))
             .background(Color.yellow.opacity(0.4))
@@ -15,8 +22,12 @@ struct PokemonListView: View {
         }
         .searchable(text: $viewModel.searchText, prompt: "Pokemon")
         
+        .onAppear{
+            
+            viewModel.fetchPokemonUseCase()
+        }
+      
     }
-    
 }
 
 struct PokemonImageRow: View {
@@ -51,21 +62,9 @@ struct PokemonRowSubview: View {
         }
         .navigationBarBackButtonHidden()
 
-        .listRowBackground(Color.yellow.opacity(0.2)) // Définit l'arrière-plan pour chaque ligne
+        .listRowBackground(Color.yellow.opacity(0.2))
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 #Preview {
     let testPokemon: [PokemonEntities] = [

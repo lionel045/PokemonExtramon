@@ -120,8 +120,6 @@ struct NamePokemon: Codable {
     
 }
 
-
-
 extension PokemonData {
     // Map entity to model
     func toEntity() -> PokemonEntities {

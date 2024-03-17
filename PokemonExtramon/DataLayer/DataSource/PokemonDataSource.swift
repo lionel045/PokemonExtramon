@@ -13,5 +13,4 @@ import Combine
 protocol PokemonDataSource {
     
     func fetchPokemon() -> AnyPublisher<[PokemonEntities], Error >
-    
 }

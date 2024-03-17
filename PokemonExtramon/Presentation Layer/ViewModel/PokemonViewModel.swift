@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 class PokemonViewModel: ObservableObject {
     @Published var pokemon : [PokemonEntities] = []
+    @Published var pokemonTenResult : [PokemonEntities] = []
     @Published var searchText = ""
     private var pokemonDataSource: PokemonDataSource
     private var pokemonRepository: PokemonRepoInterface
@@ -19,7 +20,6 @@ class PokemonViewModel: ObservableObject {
         self.pokemonDataSource = PokemonDataSourceImpl()
           self.pokemonRepository = PokemonRepoImpl(dataSource: pokemonDataSource)
           self.pokemonUseCases = FetchPokemonUseCaseImpl(repo: pokemonRepository)
-        
     }
     
     var searchPokemon: [PokemonEntities] {
@@ -46,18 +46,27 @@ class PokemonViewModel: ObservableObject {
                 
             }, receiveValue: { pokemon in
                 self.pokemon = pokemon
+                self.retrieveTenFirstResult() // Appel ici après le chargement complet
+
             })
             .store(in: &cancellables)
-        
     }
     
     func getPokemonById(_ id: Int) -> PokemonEntities? {
         return pokemon.first {$0.id == id}
      }
     
+  
+    func retrieveTenFirstResult() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [weak self] in
+            guard let strongSelf = self else {return}
+            let newPokemons = strongSelf.pokemon.filter { !strongSelf.pokemonTenResult.contains($0) }
+            let pokemonsToAdd = Array(newPokemons.prefix(10))
+            strongSelf.pokemonTenResult.append(contentsOf: pokemonsToAdd)
+        }
+    }
+
 }
-
-
 
 extension PokemonViewModel {
     convenience init(testData: [PokemonEntities]) {
