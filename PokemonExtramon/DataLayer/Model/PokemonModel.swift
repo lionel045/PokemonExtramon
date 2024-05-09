@@ -148,7 +148,6 @@ extension PokemonData {
             }
         )
         
-        
        let talentEntites = self.talents?.map { TalentEntites(name: $0.name, tc: $0.tc) } ?? []
         
         return PokemonEntities(

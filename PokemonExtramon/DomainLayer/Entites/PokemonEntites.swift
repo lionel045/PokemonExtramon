@@ -28,12 +28,16 @@ struct PokemonEntities: Identifiable, Equatable{
     let sexe: SexeEntites?
     let catchRate: Int?
     let level100: Int?
-    var color: Color {
-        guard let type = type.first?.name?.capitalized else {
-            return Color.gray
-        }
-
-        switch type {
+    var haveEvolution: Bool {
+    
+        return evolution.next != nil || evolution.pre != nil
+        
+    }
+    
+    var colorBackground: [Color] {
+        return type.compactMap { typeName in
+ 
+            switch typeName.name{
         case "Plante":
             return Color.green
         case "Feu":
@@ -69,7 +73,7 @@ struct PokemonEntities: Identifiable, Equatable{
         default:
             return Color.gray
         }
-
+        }
         }
 }
 
@@ -78,7 +82,7 @@ struct SpriteEntites {
     let shiny : String?
 }
 
-struct TypeEntites {
+struct TypeEntites : Hashable {
     
     let name : String?
     let image : String?
@@ -136,9 +140,13 @@ struct PokemonStats {
     
 }
 
+
+
 extension PokemonEntities  {
   
     static func == (lhs: PokemonEntities, rhs: PokemonEntities) -> Bool {
         return lhs.id == rhs.id
     }
+    
+
 }

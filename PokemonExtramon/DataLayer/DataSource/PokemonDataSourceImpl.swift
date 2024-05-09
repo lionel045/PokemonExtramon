@@ -14,7 +14,7 @@ struct PokemonDataSourceImpl : PokemonDataSource {
 
     func fetchPokemon() -> AnyPublisher<[PokemonEntities], any Error> {
         
-        guard let url = URL(string: "https://tyradex.vercel.app/api/v1/gen/1") else {
+        guard let url = URL(string: "https://tyradex.vercel.app/api/v1/pokemon") else {
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
           }
         let jsonDecoder = JSONDecoder()

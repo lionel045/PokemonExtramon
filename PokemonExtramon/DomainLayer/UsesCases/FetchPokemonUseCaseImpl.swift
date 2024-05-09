@@ -12,6 +12,10 @@ struct FetchPokemonUseCaseImpl: FetchPokemonUseCase {
     
     var repo: PokemonRepoInterface
     
+    init(repo: PokemonRepoInterface) {
+        self.repo = repo
+    }
+    
     func execute() -> AnyPublisher<[PokemonEntities], any Error> {
         return repo.fetchPokemon()
     }

@@ -12,6 +12,10 @@ struct PokemonRepoImpl : PokemonRepoInterface {
     
     var dataSource : PokemonDataSource
     
+    init(dataSource: PokemonDataSource) {
+        self.dataSource = dataSource
+    }
+    
     func fetchPokemon() -> AnyPublisher<[PokemonEntities], any Error> {
         
         dataSource.fetchPokemon()
