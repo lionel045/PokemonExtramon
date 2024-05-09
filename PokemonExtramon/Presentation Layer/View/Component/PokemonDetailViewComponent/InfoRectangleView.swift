@@ -26,7 +26,7 @@ struct InfoRectangleView: View {
                     .frame(width: geometry.size
                         .width, height: geometry.size.height * 0.9)
                     .foregroundColor(Color.white.opacity(0.5))
-                    .padding(.top, showEvolutionView ? geometry.size.height * 0.15 : geometry.size.height * 0.50)
+                    .padding(.top, showEvolutionView ? geometry.size.height * 0.25 : geometry.size.height * 0.50)
               
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

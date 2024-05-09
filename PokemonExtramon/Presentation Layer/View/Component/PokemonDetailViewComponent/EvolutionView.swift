@@ -28,7 +28,7 @@ struct EvolutionView: View {
                         SpritePkm(pokemon: evolution, frame: 60, minWidth: 60)
                                   
                     }
-                    .padding(.bottom, 10)
+                    .padding(.bottom, 40)
                 }
             }
         }

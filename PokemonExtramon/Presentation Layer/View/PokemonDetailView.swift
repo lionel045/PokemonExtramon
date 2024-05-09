@@ -2,14 +2,13 @@ import SwiftUI
 
 struct PokemonDetailView: View {
     let pokemonId: Int
-    @State  var showEvolutionView : Bool
+    @State var showEvolutionView: Bool
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: PokemonViewModel
     
     var drag: some Gesture {
         DragGesture()
             .onEnded { value in
-                
                 if value.translation.width > 100 && abs(value.translation.height) < 100 {
                     dismiss()
                 }
@@ -18,46 +17,42 @@ struct PokemonDetailView: View {
     
     var body: some View {
         GeometryReader { geometry in
-        ZStack {
-            if let pokemon = viewModel.getPokemonById(pokemonId) {
-                pokemon.colorBackground.first
-                    .ignoresSafeArea()
-                Image("pokemon_background")
-                    .renderingMode(.template)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 200, height: geometry.size.height * 0.25)
-                    .foregroundColor(.white.opacity(1))
-                    .offset(x: 125, y: -250)
-                    
-                InfoRectangleView(pokemon: pokemon)
-                    .ignoresSafeArea()
-                VStack(spacing: geometry.size.height < 800 ? 0 : 30) {
-                    Labelpkm(pokemon: pokemon).padding(.top, geometry.size.height < 800 ? -40 : 0 )
-                    
-                    SpritePkm(pokemon: pokemon, frame: showEvolutionView ? geometry.size.height * 0.23 : geometry.size.height * 0.40, minWidth: 120)
-                    
-                        PokemonsTypeView(pokemon: pokemon)
-                        InformationPokemonLabel(pokemon: pokemon)
-                        StatsListView(pokemon: pokemon)
-                            .padding(.bottom, showEvolutionView ? 0 : 10)
+            ZStack {
+                if let pokemon = viewModel.getPokemonById(pokemonId) {
+                    pokemon.colorBackground.first
+                        .ignoresSafeArea()
+                    Image("pokemon_background")
+                        .renderingMode(.template)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 200, height: geometry.size.height * 0.25)
+                        .foregroundColor(.white.opacity(1))
+                        .offset(x: 125, y: -250)
 
-                    EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel)
-                 
+                    InfoRectangleView(pokemon: pokemon)
+                        .ignoresSafeArea()
+                    
+                    VStack(spacing: geometry.size.height < 800 ? 0 : 40) {
+                        Labelpkm(pokemon: pokemon)
+                        SpritePkm(pokemon: pokemon, frame: showEvolutionView ? geometry.size.height * 0.23 : geometry.size.height * 0.40, minWidth: 120)
+                        PokemonsTypeView(pokemon: pokemon)
+                        InformationPokemonLabel(pokemon: pokemon).padding(.bottom)
+                        StatsListView(pokemon: pokemon)
+                        EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel).padding(.bottom, 3)
                     }
-                .padding(.bottom, 40)
-                .toolbar {
-                    CustomToolbar(pokemon: pokemon)
+                    .offset(y: geometry.size.height < 800 ? -48 : 0) // Adjust this value based on your UI needs
+                    .toolbar {
+                        CustomToolbar(pokemon: pokemon)
+                    }
+                    .navigationBarBackButtonHidden(true)
+                } else {
+                    Text("Pokémon introuvable")
+                        .foregroundColor(.white)
                 }
-                .navigationBarBackButtonHidden(true)
-            } else {
-                Text("Pokémon introuvable")
-                    .foregroundColor(.white)
             }
+            .gesture(drag)
         }
-        .gesture(drag)
     }
-}
 }
 
 struct StatsListView: View {
