@@ -1,19 +1,27 @@
-//
-//  PokemonExtramonApp.swift
-//  PokemonExtramon
-//
-//  Created by Lion on 07/03/2024.
-//
-
 import SwiftUI
 
-@available(iOS 14.0, *)
 @main
 struct PokemonExtramonApp: App {
+    var viewModel: PokemonViewModel
+
+    init() {
+        viewModel = PokemonExtramonApp.createViewModel()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(PokemonViewModel())
+                .environmentObject(viewModel)
         }
+    }
+}
+
+extension PokemonExtramonApp {
+    //MARK: dependency injection static func
+    static func createViewModel() -> PokemonViewModel {
+        let dataSource = PokemonDataSourceImpl()
+        let repo = PokemonRepoImpl(dataSource: dataSource)
+        let useCase = FetchPokemonUseCaseImpl(repo: repo)
+        return PokemonViewModel(pokemonUseCase: useCase)
     }
 }

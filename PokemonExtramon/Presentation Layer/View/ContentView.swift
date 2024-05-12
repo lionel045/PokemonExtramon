@@ -16,8 +16,10 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    let viewModel = PokemonViewModel()
-    return ContentView()
-         .environmentObject(viewModel)
- }
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        let viewModel = PokemonExtramonApp.createViewModel()
+        return ContentView().environmentObject(viewModel)
+    }
+}
+

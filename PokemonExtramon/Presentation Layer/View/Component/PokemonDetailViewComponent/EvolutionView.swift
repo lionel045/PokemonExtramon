@@ -23,13 +23,17 @@ struct EvolutionView: View {
                     .frame(maxWidth: .infinity)
                 HStack(spacing: 5) {
                     
-                    ForEach(viewModel.getEvolutions(for: pokemon), id: \.id) { evolution in
+                    ForEach(viewModel.evolutions, id: \.id) { evolution in
                         
                         SpritePkm(pokemon: evolution, frame: 60, minWidth: 60)
                                   
                     }
                     .padding(.bottom, 40)
                 }
+            }
+            .onAppear {
+                viewModel.getEvolutions(for: pokemon)
+                
             }
         }
         else {

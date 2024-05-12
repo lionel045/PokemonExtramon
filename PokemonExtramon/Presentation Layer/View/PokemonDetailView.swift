@@ -32,15 +32,16 @@ struct PokemonDetailView: View {
                     InfoRectangleView(pokemon: pokemon)
                         .ignoresSafeArea()
                     
-                    VStack(spacing: geometry.size.height < 800 ? 0 : 40) {
+                    VStack(spacing: geometry.size.height < 700 ? 0 : 10) {
                         Labelpkm(pokemon: pokemon)
                         SpritePkm(pokemon: pokemon, frame: showEvolutionView ? geometry.size.height * 0.23 : geometry.size.height * 0.40, minWidth: 120)
                         PokemonsTypeView(pokemon: pokemon)
                         InformationPokemonLabel(pokemon: pokemon).padding(.bottom)
                         StatsListView(pokemon: pokemon)
-                        EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel).padding(.bottom, 3)
+                        EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel).padding(.bottom, 10)
                     }
-                    .offset(y: geometry.size.height < 800 ? -48 : 0) // Adjust this value based on your UI needs
+        
+                    .offset(y: geometry.size.height < 700 ? -48 : 0) // Adjust this value based on your UI needs
                     .toolbar {
                         CustomToolbar(pokemon: pokemon)
                     }

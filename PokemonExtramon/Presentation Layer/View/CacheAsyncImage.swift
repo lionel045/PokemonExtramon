@@ -56,16 +56,15 @@ struct CacheAsyncImage<Content>: View where Content: View {
 
 struct CacheAsyncImage_Previews: PreviewProvider {
     static var previews: some View {
-        // Votre URL d'exemple pour l'image
+    
         let sampleImageURL = URL(string: "https://raw.githubusercontent.com/Yarkis01/TyraDex/images/sprites/1/regular.png")!
 
-        // Utilisez CacheAsyncImage avec l'URL de l'image
         CacheAsyncImage(url: sampleImageURL) { phase in
             switch phase {
             case .empty:
-                ProgressView() // Affiche un indicateur de chargement pendant le chargement de l'image
+                ProgressView()
             case .success(let image):
-                image.resizable() // Affiche l'image chargée
+                image.resizable()
                      .aspectRatio(contentMode: .fit)
                      .frame(width: 100, height: 100)
             case .failure(_):

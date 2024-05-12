@@ -6,7 +6,6 @@ struct PokemonListView: View {
         NavigationStack {
             
             VStack {
-                
                 SearchBar(text: $viewModel.searchText)
                 List {
                     
@@ -25,9 +24,7 @@ struct PokemonListView: View {
             .onAppear{
                 viewModel.fetchPokemonUseCase()
             }
-
         }
-        
     }
 
 struct PokemonImageRow: View {
