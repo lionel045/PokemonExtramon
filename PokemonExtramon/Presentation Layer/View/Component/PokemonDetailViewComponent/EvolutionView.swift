@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+//MARKS: View charged to display the evolution's pokemon
 struct EvolutionView: View {
     let pokemon: PokemonEntities
     
@@ -15,8 +17,7 @@ struct EvolutionView: View {
     var body: some View {
         
         if  pokemon.haveEvolution {
-            
-            VStack {
+            VStack(spacing: -1) {
                 Text("Evolutions")
                     .font(.title)
                     .foregroundColor(pokemon.colorBackground.first)
@@ -25,7 +26,7 @@ struct EvolutionView: View {
                     
                     ForEach(viewModel.evolutions, id: \.id) { evolution in
                         
-                        SpritePkm(pokemon: evolution, frame: 60, minWidth: 60)
+                        SpritePkm(pokemon: evolution, frame: UIScreen.main.bounds.height < 700 ? 60 : 100)
                                   
                     }
                     .padding(.bottom, 40)

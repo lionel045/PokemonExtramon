@@ -27,21 +27,21 @@ struct PokemonDetailView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 200, height: geometry.size.height * 0.25)
                         .foregroundColor(.white.opacity(1))
-                        .offset(x: 125, y: -250)
+                        .offset(x: 125, y: -249)
 
                     InfoRectangleView(pokemon: pokemon)
                         .ignoresSafeArea()
                     
-                    VStack(spacing: geometry.size.height < 700 ? 0 : 10) {
+                    VStack(spacing: geometry.size.height < 700 ? -5 : 10) {
                         Labelpkm(pokemon: pokemon)
-                        SpritePkm(pokemon: pokemon, frame: showEvolutionView ? geometry.size.height * 0.23 : geometry.size.height * 0.40, minWidth: 120)
-                        PokemonsTypeView(pokemon: pokemon)
+                        SpritePkm(pokemon: pokemon, frame: showEvolutionView ? geometry.size.height * 0.21 : geometry.size.height * 0.40)
+                        PokemonsTypeView(pokemon: pokemon, width: 100)
                         InformationPokemonLabel(pokemon: pokemon).padding(.bottom)
-                        StatsListView(pokemon: pokemon)
+                        StatsListView(pokemon: pokemon).padding(.bottom)
                         EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel).padding(.bottom, 10)
                     }
-        
-                    .offset(y: geometry.size.height < 700 ? -48 : 0) // Adjust this value based on your UI needs
+                    
+                    .offset(y: geometry.size.height < 700 ? -41 : 0) 
                     .toolbar {
                         CustomToolbar(pokemon: pokemon)
                     }

@@ -22,4 +22,3 @@ struct ContentView_Previews: PreviewProvider {
         return ContentView().environmentObject(viewModel)
     }
 }
-

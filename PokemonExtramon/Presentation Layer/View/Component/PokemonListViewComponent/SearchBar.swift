@@ -9,7 +9,7 @@ struct SearchBar: View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: 220, height: 40)
-                .foregroundColor(.gray.opacity(0.2))
+                .foregroundColor(.white)
                 .cornerRadius(14)
                 .scaleEffect(isScaling ? 1.40 : 1)
                 .animation(.bouncy(duration: 0.2), value: isScaling)
@@ -24,7 +24,7 @@ struct SearchBar: View {
                 
                 TextField("Search", text: $text)
                     .frame(width: 190, height: 30)
-                
+                    .foregroundColor(.black)
                 if isEditing || !text.isEmpty {
                     Button {
                         text = ""

@@ -24,7 +24,7 @@ struct StatsView : View {
                 Text("\(currentStats ?? 0 < 100 ? "0" : "")\(currentStats ?? 0)")
                 Capsule()
                     .fill(Color(.systemGray2))
-                    .frame(width: 220, height: 5) // Réduction de la hauteur de la jauge
+                    .frame(width: 220, height: 5) 
                     .overlay(
                         GeometryReader { geometry in
                             let width = min(geometry.size.width, CGFloat(currentStats ?? 0) / geometry.size.width * geometry.size.width)

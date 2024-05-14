@@ -2,35 +2,36 @@ import SwiftUI
 
 struct PokemonListView: View {
     @EnvironmentObject var viewModel: PokemonViewModel
+    let columns = Array(repeating: GridItem(.flexible()), count: 1)
+
     var body: some View {
         NavigationStack {
-            
             VStack {
                 SearchBar(text: $viewModel.searchText)
-                List {
-                    
-                    ForEach(viewModel.searchPokemon) { pokemon in
-                        
-                        PokemonRowSubview(pokemon: pokemon)
+                ScrollView {
+                    LazyVGrid(columns: columns) {
+                        ForEach(viewModel.searchPokemon) { pokemon in
+                            PokemonRowSubview(pokemon: pokemon)
+                        }
                     }
+                    .listStyle(.plain)
                 }
-                .listStyle(.plain)
-                
             }
+            .background(Color.black)
             
-            .background(Color.yellow.opacity(0.5))
-
-        }
             .onAppear{
                 viewModel.fetchPokemonUseCase()
             }
         }
     }
+}
 
 struct PokemonImageRow: View {
-    var pokemon: PokemonEntities // Correctly expecting a PokemonEntity
+    var pokemon: PokemonEntities
+    var height: CGFloat?
+    var width: CGFloat?
     var body: some View {
-        LazyHStack {
+        LazyVStack {
             if let imageURLString = pokemon.sprite?.regular, let imageURL = URL(string: imageURLString) {
             CacheAsyncImage(url: imageURL) { phase in
                             switch phase {
@@ -39,7 +40,7 @@ struct PokemonImageRow: View {
                             case .success(let image):
                                 image.resizable()
                                      .aspectRatio(contentMode: .fit)
-                                     .frame(width: 40, height: 50)
+                                     .frame(width: width, height: height)
                                      .cornerRadius(8)
                             case .failure:
                                 Image("pokeball")  .resizable()
@@ -52,7 +53,6 @@ struct PokemonImageRow: View {
                     } else {
                         ProgressView()
                     }
-            Text(pokemon.name)
         }
     }
 }
@@ -63,7 +63,7 @@ struct PokemonRowSubview: View {
     
     var body: some View {
         NavigationLink(destination: PokemonDetailView(pokemonId: pokemon.id, showEvolutionView: pokemon.haveEvolution).environmentObject(viewModel)) {
-            PokemonImageRow(pokemon: pokemon)
+            PokeCard(pokemon: pokemon)
         }
         .listRowBackground(Color.yellow.opacity(0.4))
         .listRowSeparator(.hidden)

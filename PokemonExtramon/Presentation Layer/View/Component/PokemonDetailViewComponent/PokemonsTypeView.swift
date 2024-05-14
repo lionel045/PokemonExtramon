@@ -10,6 +10,7 @@ import SwiftUI
 //MARK: Rectangle Embed information
 struct PokemonsTypeView: View {
    let pokemon: PokemonEntities
+    let width: CGFloat
    var body: some View {
        
            HStack {
@@ -19,21 +20,23 @@ struct PokemonsTypeView: View {
                        let color = pokemon.colorBackground[index]
                        RoundedRectangle(cornerRadius: 30, style: .continuous)
                            .fill(color)
-                           .frame(width: 90, height: 40)
+                           .frame(width: width, height: 40)
                            .overlay(
-                               Text(pokemon.type[index].name!)
-                                   .foregroundColor(.white)
-                           )
+                            Text(pokemon.type[index].name!)
+                                .foregroundColor(.white)
+                                .lineLimit(1)
+                                .truncationMode(.tail)
+                                .padding(.horizontal, 4)
+                            )
                    }
                }
            }
    }
 }
 
-
     struct PokemonsTypeView_Previews: PreviewProvider {
         static var previews: some View {
             let pokemon = PokemonViewModel.mockPokemon().pokemon[0]
-            PokemonsTypeView(pokemon: pokemon)
+            PokemonsTypeView(pokemon: pokemon, width: 70)
         }
     }
