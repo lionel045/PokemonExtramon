@@ -12,7 +12,7 @@ struct PokeCard: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .frame(width: UIScreen.main.bounds.width,height: 200)
+                .frame(width: UIScreen.main.bounds.width * 0.90,height: 200)
                 .foregroundColor(pokemon.colorBackground.first).opacity(0.5)
                 .cornerRadius(20)
             VStack {
@@ -26,9 +26,11 @@ struct PokeCard: View {
                     .padding(.leading, 30)
 
                     SpritePkm(pokemon: pokemon, frame: 50)
-                        .frame(width: 180,height: 190)
+                        .frame(width: 160,height: 170)
                     
                 }
+                
+                
             }
         }
     }

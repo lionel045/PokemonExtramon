@@ -190,8 +190,8 @@
 			children = (
 				B45502A52BDEC5AE00523104 /* Component */,
 				B4EEB6B02BA4213A006BD493 /* ContentView.swift */,
-				B4EEB6B12BA4213A006BD493 /* PokemonDetailView.swift */,
 				B4EEB6B22BA4213A006BD493 /* PokemonListView.swift */,
+				B4EEB6B12BA4213A006BD493 /* PokemonDetailView.swift */,
 				B407DAD52BA82C5C00E70D60 /* CacheAsyncImage.swift */,
 			);
 			path = View;

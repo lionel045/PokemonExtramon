@@ -25,9 +25,7 @@ struct Labelpkm: View {
                     .fontWeight(.bold)
                     .foregroundColor(.white)
             }
-
         }
-
     }
 }
 struct Labelpkm_Previews: PreviewProvider {

@@ -64,8 +64,7 @@ class PokemonViewModel: ObservableObject {
         let preEvolution = pokemon.evolution.pre?.compactMap { getPokemonById($0.pokedexId ?? 0) }
         evolutions.append(contentsOf: preEvolution ?? [])
         
-     //MARK: Add the current pokemon at the middle
-        evolutions.append(pokemon)
+  
         
         //MARK: Find if the current Pokemon have nextEvolution
         let nextEvolution = pokemon.evolution.next?.compactMap { getPokemonById($0.pokedexId ?? 0) }

@@ -19,7 +19,6 @@ struct SearchBar: View {
                     .foregroundColor(.gray)
                     .padding(.leading, 30)
                     .offset(x: isEditing ? -20 : 0)
-                    .rotationEffect(Angle(degrees: isEditing ? 360 : 0))
                     .animation(Animation.linear(duration: 1), value: isEditing)
                 
                 TextField("Search", text: $text)

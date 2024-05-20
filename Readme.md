@@ -6,7 +6,7 @@ Welcome to my SwiftUI Pokedex project! This is my first attempt at using SwiftUI
 ![Screen1](https://github.com/lionel045/PokemonExtramon/blob/main/Screen1.png)
 ![Screen2](https://github.com/lionel045/PokemonExtramon/blob/main/Screen2.png)
 
-## Project Overview
+## Project Overview 
 This Pokedex app is designed using SwiftUI and follows a robust architecture to ensure that the code is modular, reusable, and maintainable. The architecture is divided into several layers, each with a specific role and responsibility.
 
 ### Clean Architecture Layers
@@ -31,7 +31,7 @@ This Pokedex app is designed using SwiftUI and follows a robust architecture to 
 - **Reusability**: Modular design allows for reusing components in different parts of the application or in different projects.
 - **Testability**: Separation of concerns makes it easier to test the application at different levels (e.g., unit testing, integration testing).
 
-## Roadmap
+## Roadmap ⚠️⚠️⚠️
 Moving forward, the development of this Pokedex app will focus on the following key enhancements:
 
 - **UI Improvements**: Enhance the user interface to be more visually appealing and intuitive. This includes refining layouts and adding more interactive elements.

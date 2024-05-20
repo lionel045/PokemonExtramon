@@ -27,25 +27,28 @@ struct PokemonDetailView: View {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 200, height: geometry.size.height * 0.25)
                         .foregroundColor(.white.opacity(1))
-                        .offset(x: 125, y: -249)
-
+                        .offset(x: 125, y: -241)
+                    
                     InfoRectangleView(pokemon: pokemon)
                         .ignoresSafeArea()
                     
-                    VStack(spacing: geometry.size.height < 700 ? -5 : 10) {
+                    VStack(spacing: geometry.size.height < 700 ? -5 : 0) {
                         Labelpkm(pokemon: pokemon)
-                        SpritePkm(pokemon: pokemon, frame: showEvolutionView ? geometry.size.height * 0.21 : geometry.size.height * 0.40)
-                        PokemonsTypeView(pokemon: pokemon, width: 100)
+                            .offset(y: geometry.size.height < 700 ? -50 : -24)
+                        SpritePkm(pokemon: pokemon, frame: showEvolutionView ? geometry.size.height * 0.24 : geometry.size.height * 0.40)
+                        PokemonsTypeView(pokemon: pokemon, width: 100).padding()
                         InformationPokemonLabel(pokemon: pokemon).padding(.bottom)
-                        StatsListView(pokemon: pokemon).padding(.bottom)
-                        EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel).padding(.bottom, 10)
+                        StatsListView(pokemon: pokemon).padding(.all, 3)
+                        EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel)
+                        
                     }
+                    Spacer(minLength: 21)
                     
-                    .offset(y: geometry.size.height < 700 ? -41 : 0) 
-                    .toolbar {
-                        CustomToolbar(pokemon: pokemon)
-                    }
-                    .navigationBarBackButtonHidden(true)
+                        .offset(y: geometry.size.height < 700 ? -41 : 0)
+                        .toolbar {
+                            CustomToolbar(pokemon: pokemon)
+                        }
+                        .navigationBarBackButtonHidden(true)
                 } else {
                     Text("Pokémon introuvable")
                         .foregroundColor(.white)
@@ -61,7 +64,7 @@ struct StatsListView: View {
     
     var body: some View {
         VStack {
- 
+            
             StatsView(pokemon: pokemon, currentStats: pokemon.stats.hp, nameOfStats: "HP")
             StatsView(pokemon: pokemon, currentStats: pokemon.stats.attack, nameOfStats: "ATK")
             StatsView(pokemon: pokemon, currentStats: pokemon.stats.defense, nameOfStats: "DEF")
@@ -69,7 +72,7 @@ struct StatsListView: View {
             StatsView(pokemon: pokemon, currentStats: pokemon.stats.spdefense, nameOfStats: "SDEF")
             StatsView(pokemon: pokemon, currentStats: pokemon.stats.speed, nameOfStats: "SPD")
         }
-
+        
     }
 }
 
@@ -112,7 +115,7 @@ struct PokemonDetailView_Previews: PreviewProvider {
                 .environmentObject(viewModel)
                 .previewDevice(PreviewDevice(rawValue: "iPhone 12 Pro Max"))
                 .previewDisplayName("iPhone 12 Pro Max")
-           
+            
         }
     }
 }

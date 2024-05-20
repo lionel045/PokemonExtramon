@@ -34,6 +34,7 @@ struct PokemonEntities: Identifiable, Equatable{
         
     }
     
+    
     var colorBackground: [Color] {
         return type.compactMap { typeName in
  
