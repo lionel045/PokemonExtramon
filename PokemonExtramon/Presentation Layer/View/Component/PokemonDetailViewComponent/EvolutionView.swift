@@ -25,7 +25,7 @@ struct EvolutionView: View {
                 TabView(selection: $currentPage) {
                     ForEach(viewModel.evolutions.indices, id: \.self) { index in
                 
-                    SpritePkm(pokemon: viewModel.evolutions[index], frame: UIScreen.main.bounds.height < 700 ? 60 : 70)
+                    SpritePkm(pokemon: viewModel.evolutions[index], frame: UIScreen.main.bounds.height < 700 ? 60 : 80)
                         .tag(index)
                         
                     }

@@ -42,7 +42,7 @@ struct PokemonDetailView: View {
                         EvolutionView(pokemon: pokemon, showEvolution: $showEvolutionView, viewModel: viewModel)
                         
                     }
-                    Spacer(minLength: 21)
+                    Spacer(minLength: 24)
                     
                         .offset(y: geometry.size.height < 700 ? -41 : 0)
                         .toolbar {
